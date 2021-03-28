@@ -108,6 +108,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpot: {fileID: 0}
+  enemiesInRange: []
+  fireRate: 0.5
+  rangeRadius: 2.8
+  damage: 20
+  isActive: 0
+  targetEnemy: {fileID: 0}
 --- !u!135 &4638293419563392639
 SphereCollider:
   m_ObjectHideFlags: 0
