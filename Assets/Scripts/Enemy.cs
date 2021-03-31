@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public float speed;
 
-    public List<Tower> towersTargetingMe;
+    public List<Tower> towersCanTargetMe;
 
     public int hp;
 
@@ -14,9 +14,13 @@ public class Enemy : MonoBehaviour
     {
         transform.DOMoveZ(LevelManager.Instance.enemyFinishPoint.position.z, speed).SetSpeedBased();
     }
-    public void OnTowerTarget(Tower tower)
+    public void OnTowerInRange(Tower tower)
     {
-        towersTargetingMe.Add(tower);
+        towersCanTargetMe.Add(tower);
+    }
+    public void OnTowerOutRange(Tower tower)
+    {
+        towersCanTargetMe.Remove(tower);
     }
     public void GetDamage(int damage)
     {
@@ -24,7 +28,7 @@ public class Enemy : MonoBehaviour
         if(hp <= 0)
         {
             hp = 0;
-            towersTargetingMe.ForEach(x => x.OnEnemyDead(this));
+            towersCanTargetMe.ForEach(x => x.OnEnemyDead(this));
             Destroy(gameObject);
         }
     }

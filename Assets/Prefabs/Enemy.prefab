@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.2
+  towersTargetingMe: []
   hp: 100
 --- !u!54 &2439227794177696167
 Rigidbody:

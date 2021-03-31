@@ -22,7 +22,6 @@ public class Tower : MonoBehaviour
         if (enemiesInRange.Count > 0 && targetEnemy == null && isActive)
         {
             targetEnemy = enemiesInRange.First();
-            targetEnemy.OnTowerTarget(this);
             InvokeRepeating("Shoot", 0, fireRate);
         }
     }
@@ -35,6 +34,7 @@ public class Tower : MonoBehaviour
         if(other.CompareTag("Enemy") && isActive)
         {
             enemiesInRange.Add(other.GetComponent<Enemy>());
+            other.GetComponent<Enemy>().OnTowerInRange(this);
         }
     }
     public void OnEnemyDead(Enemy enemy)
@@ -58,6 +58,7 @@ public class Tower : MonoBehaviour
         if(other.CompareTag("Enemy") && isActive)
         {
             Enemy enemy = other.GetComponent<Enemy>();
+            enemy.OnTowerOutRange(this);
             enemiesInRange.Remove(enemy);
             if (enemy == targetEnemy)
             {
