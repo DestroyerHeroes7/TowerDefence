@@ -6,13 +6,19 @@ public class Enemy : MonoBehaviour
 {
     public float speed;
 
+    public static int damage = 20;
     public List<Tower> towersCanTargetMe;
 
     public int hp;
 
     void Start()
     {
-        transform.DOMoveZ(LevelManager.Instance.enemyFinishPoint.position.z, speed).SetSpeedBased();
+        transform.DOMoveZ(LevelManager.Instance.enemyFinishPoint.position.z, speed).SetSpeedBased()
+        .OnComplete(() =>
+        {
+            LevelManager.Instance.OnPlayerGetDamage();
+            Destroy(gameObject);
+        });
     }
     public void OnTowerInRange(Tower tower)
     {
